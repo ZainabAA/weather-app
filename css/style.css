@@ -1,0 +1,15 @@
+body {
+    margin: 0;
+    text-align: center;
+}
+header{
+    background-color: #E8B951;
+    padding: 2em 0;
+} 
+.header-gif{
+    object-fit: contain;
+}
+
+.main-temp{
+    visibility: hidden;
+}
