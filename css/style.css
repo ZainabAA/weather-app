@@ -1,15 +1,45 @@
 body {
-    margin: 0;
+    margin: 0 0 0 0;
     text-align: center;
+    background-color: #E8B951;
 }
 header{
-    background-color: #E8B951;
+    /* background-color: #E8B951; */
     padding: 2em 0;
 } 
-.header-gif{
-    object-fit: contain;
+
+.input-container{
+    padding: 2em 0;
+    background-color: rgba(255, 255, 255, 0.571);
 }
 
-.main-temp{
+.header-gif{
+    object-fit: contain;
+    height: 30%;
+    width: 30%;
+}
+
+.secondary-temp, .detail{
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+}
+
+.secondary-temp{
+    background-image: url('https://b.kisscc0.com/20180815/qaq/kisscc0-cloud-sky-theme-blue-simple-clouds-5b748a162c3ec0.9453061615343641821812.png');
+    /* background-color: rgba(255, 255, 255, 0.468); */
+    background-size: contain;
+    background-repeat: repeat;
+}
+.secondary-temp div, .detail div{
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.571);
+    width: 200px;
+    height: 200px;
+    align-items: center;
+}
+
+.seperator{
     visibility: hidden;
+    border-top: 0.3em solid black;
 }

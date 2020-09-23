@@ -5,8 +5,11 @@ const detail_div = document.querySelector('.detail');
 const API_KEY = '9b64af44ee3ed708f05f6e889817ea53';
 
 btn.addEventListener('click', () => {
+    // main_temp_div.removeChild(main_temp_div.childNodes[0]);
+    // console.log(main_temp_div);
+
     let location = input.value;
-    console.log(input.value);
+    //console.log(input.value);
     let response = fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_KEY}`);
     
     response.then(res =>{
@@ -26,39 +29,52 @@ btn.addEventListener('click', () => {
 
 function renderResults(data){
     /*-----------main-temp---------------------*/
-    let secondary_div = document.createElement('div');
-    secondary_div.classList.add('secondary_temp');
+    let temp_title = document.createElement('h3');
+    let temp_text = document.createElement('p');
+    temp_title.textContent = 'Temperature';
+    temp_text.textContent = data.main.temp;
 
+    let secondary_div = document.createElement('div');
+    secondary_div.classList.add('secondary-temp');
+
+
+    let feels_like_div = document.createElement('div');
     let secondary_title_feels_like = document.createElement('h3');
     let secondary_text_feels_like = document.createElement('p');
     
+    let min_temp_div = document.createElement('div');
     let secondary_title_min_temp = document.createElement('h3');
     let secondary_text_min_temp = document.createElement('p');
 
+    let max_temp_div = document.createElement('div');
     let secondary_title_max_temp = document.createElement('h3');
     let secondary_text_max_temp = document.createElement('p');
 
 
     secondary_title_feels_like.textContent = 'Feels Like';
     secondary_text_feels_like.textContent = data.main.feels_like;
-    secondary_div.append(secondary_title_feels_like);
-    secondary_div.append(secondary_text_feels_like);
+    feels_like_div.append(secondary_title_feels_like);
+    feels_like_div.append(secondary_text_feels_like);
+    secondary_div.append(feels_like_div);
 
     secondary_title_min_temp.textContent = 'Min Temp';
     secondary_text_min_temp.textContent = data.main.temp_min;
-    secondary_div.append(secondary_title_min_temp);
-    secondary_div.append(secondary_text_min_temp);
+    min_temp_div.append(secondary_title_min_temp);
+    min_temp_div.append(secondary_text_min_temp);
+    secondary_div.append(min_temp_div);
     
     secondary_title_max_temp.textContent = 'Max Temp';
     secondary_text_max_temp.textContent = data.main.temp_max;
-    secondary_div.append(secondary_title_max_temp);
-    secondary_div.append(secondary_text_max_temp);
+    max_temp_div.append(secondary_title_max_temp);
+    max_temp_div.append(secondary_text_max_temp);
+    secondary_div.append(max_temp_div);
 
 
-    main_temp_div.style.visibility = 'visible';
-    main_temp_div.append(data.main.temp);
+    main_temp_div.append(temp_title);
+    main_temp_div.append(temp_text);
     main_temp_div.append(secondary_div);
 
+    document.querySelector('.seperator').style.visibility = 'visible';
     /*-----------details---------------------*/
     let humidity_div = document.createElement('div');
     let wind_div = document.createElement('div');
