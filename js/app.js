@@ -2,10 +2,16 @@ const input = document.querySelector('.input');
 const btn = document.querySelector('.btn');
 const main_temp_div = document.querySelector('.main-temp');
 const detail_div = document.querySelector('.detail');
+
 const API_KEY = '9b64af44ee3ed708f05f6e889817ea53';
 
 btn.addEventListener('click', () => {
-    // main_temp_div.removeChild(main_temp_div.childNodes[0]);
+    /*----new query--------*/
+    if(main_temp_div.childElementCount>0){
+        main_temp_div.innerHTML = '';
+        detail_div.innerHTML = '';
+    }
+
     // console.log(main_temp_div);
 
     let location = input.value;
@@ -28,15 +34,19 @@ btn.addEventListener('click', () => {
 });
 
 function renderResults(data){
-    /*-----------main-temp---------------------*/
     let temp_title = document.createElement('h3');
     let temp_text = document.createElement('p');
+    let secondary_div = document.createElement('div');
+    let humidity_div = document.createElement('div');
+    let wind_div = document.createElement('div');
+    let rain_div = document.createElement('div');
+
+
+    /*-----------main-temp---------------------*/
     temp_title.textContent = 'Temperature';
     temp_text.textContent = data.main.temp;
 
-    let secondary_div = document.createElement('div');
     secondary_div.classList.add('secondary-temp');
-
 
     let feels_like_div = document.createElement('div');
     let secondary_title_feels_like = document.createElement('h3');
@@ -76,9 +86,6 @@ function renderResults(data){
 
     document.querySelector('.seperator').style.visibility = 'visible';
     /*-----------details---------------------*/
-    let humidity_div = document.createElement('div');
-    let wind_div = document.createElement('div');
-    let rain_div = document.createElement('div');
 
     let humidity_title = document.createElement('h3');
     let humidity_text = document.createElement('p');
@@ -103,7 +110,10 @@ function renderResults(data){
     wind_div.append(wind_text_degree);
 
     rain_title.textContent = 'Rain';
-    rain_text.textContent = data.rain['1h'];
+    if(!data.rain)
+        rain_text.textContent = 'no rain';
+    else
+        rain_text.textContent = data.rain['1h'];
     rain_div.append(rain_title);
     rain_div.append(rain_text);
 
