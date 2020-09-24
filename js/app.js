@@ -1,37 +1,49 @@
-const input = document.querySelector('.input');
+const input = document.querySelector('.city-input');
 const btn = document.querySelector('.btn');
 const main_temp_div = document.querySelector('.main-temp');
 const detail_div = document.querySelector('.detail');
+const countrySelect = document.querySelector('.country-select')
 
 const API_KEY = '9b64af44ee3ed708f05f6e889817ea53';
 
-btn.addEventListener('click', () => {
+btn.addEventListener('click', async () => {
     /*----new query--------*/
     if(main_temp_div.childElementCount>0){
         main_temp_div.innerHTML = '';
         detail_div.innerHTML = '';
     }
 
-    // console.log(main_temp_div);
+    loading();
 
     let location = input.value;
     //console.log(input.value);
-    let response = fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_KEY}`);
+    let response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_KEY}`);
     
-    response.then(res =>{
-        if(res.ok){
-            //console.log('ok',res.status);
-            res.json().then(data=>{
-                console.log(data);
-                renderResults(data);
-            });
+    if(response.ok){
+        let res = await response.json();
+        
+        renderResults(res);
+    }
+    else{
+        location = countrySelect.value;
+        response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_KEY}`);
+        if(response.ok){
+            let res = await response.json();
+            
+            renderResults(res);
         }
-        else {
-        console.log("HTTP-Error: " +res.status);
+        else{
+            let warning = document.createElement('h1');
+            warning.textContent = "Sorry, we don't have information about this country";
+            main_temp_div.append(warning);
         }
-    });
-    
+    }
 });
+
+
+function loading(){
+    
+}
 
 function renderResults(data){
     let temp_title = document.createElement('h3');
