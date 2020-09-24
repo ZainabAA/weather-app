@@ -3,6 +3,7 @@ const btn = document.querySelector('.btn');
 const main_temp_div = document.querySelector('.main-temp');
 const detail_div = document.querySelector('.detail');
 const countrySelect = document.querySelector('.country-select')
+const loadingPoints = document.querySelectorAll('.loading-point');
 
 const API_KEY = '9b64af44ee3ed708f05f6e889817ea53';
 
@@ -13,7 +14,7 @@ btn.addEventListener('click', async () => {
         detail_div.innerHTML = '';
     }
 
-    loading();
+    loading(true);
 
     let location = input.value;
     //console.log(input.value);
@@ -29,7 +30,7 @@ btn.addEventListener('click', async () => {
         response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_KEY}`);
         if(response.ok){
             let res = await response.json();
-            
+            loading(false);
             renderResults(res);
         }
         else{
@@ -41,8 +42,22 @@ btn.addEventListener('click', async () => {
 });
 
 
-function loading(){
-    
+function loading(start){
+    if(start){
+        console.log(loadingPoints);
+        loadingPoints.forEach(point => {
+            point.style.visibility = 'visible';
+        });
+        loadingPoints[0].classList.toggle('animate-first');
+        loadingPoints[1].classList.toggle('animate-second');
+        loadingPoints[2].classList.toggle('animate-third');
+    }
+    else{
+        loadingPoints.forEach(point => {
+            point.style.visibility = 'hidden';
+        });
+    }
+
 }
 
 function renderResults(data){
