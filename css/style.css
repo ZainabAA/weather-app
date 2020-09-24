@@ -1,7 +1,31 @@
+:root{
+    --main-bg: #E8B951;
+    --secondary-bg: rgba(255, 255, 255, 0.571);
+
+    --blue-color: #65CAFF;
+
+    --main-font: 'Noto Sans JP', sans-serif;
+    --secondary-font: 'IBM Plex Sans', sans-serif;
+}
+
+h1{
+    font-size: 3rem;
+}
+h2{
+    font-size: 1.7rem;
+}
+h3{
+    font-size: 1.5rem;
+}
+p{
+    font-size: 1.2rem;
+}
+
 body {
-    margin: 0 0 0 0;
+    margin: 0;
     text-align: center;
-    background-color: #E8B951;
+    background-color: var(--main-bg);
+    font-family: var(--main-font);
 }
 header{
     /* background-color: #E8B951; */
@@ -10,7 +34,7 @@ header{
 
 .input-container{
     padding: 2em 0;
-    background-color: rgba(255, 255, 255, 0.571);
+    background-color: var(--secondary-bg);
 }
 
 .header-gif{
@@ -18,6 +42,18 @@ header{
     height: 30%;
     width: 30%;
 }
+
+.btn{
+    margin: 0.7em;
+    background-color: var(--blue-color);
+    border-style: none;
+    padding: 0.3em;
+    font-size: 1.2rem;
+    border-radius: 5%;
+    outline-style: none;
+    color: white;
+}
+
 
 .secondary-temp, .detail{
     display: flex;
@@ -33,7 +69,7 @@ header{
 }
 .secondary-temp div, .detail div{
     text-align: center;
-    background-color: rgba(255, 255, 255, 0.571);
+    background-color: var(--secondary-bg);
     width: 200px;
     height: 200px;
     align-items: center;
@@ -76,7 +112,7 @@ header{
         background-color: white;
     }
     50%{
-        background-color: #65CAFF;
+        background-color: var(--blue-color);
     }
     100%{
         background-color: white;
